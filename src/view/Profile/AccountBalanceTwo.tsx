@@ -4,10 +4,10 @@ import getCryptoCurrency from "../../service/getCryptoCurrency";
 import { isPositiveInteger } from "../../util/isPositiveInteger";
 
 export default function ListItemComponent() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<[] | undefined>([]);
 
   const showCryptoCurrency = useCallback(async (): Promise<void> => {
-    setData(await getCryptoCurrency());
+    setData(await getCryptoCurrency("4"));
   }, [getCryptoCurrency]);
 
   useEffect(() => {
