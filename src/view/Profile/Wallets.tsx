@@ -16,20 +16,18 @@ import RemoveIcon from "@mui/icons-material/Remove";
 
 export default function Wallets() {
   const [data, setData] = useState<[] | undefined>([]);
-  const [resultsPerPage, setResultsPerPage] = useState("");
+  const [resultsPerPage, setResultsPerPage] = useState("3");
 
   const showCryptoCurrency = useCallback(async (): Promise<void> => {
-    setData(await getCryptoCurrency("3"));
-  }, [getCryptoCurrency]);
+    setData(await getCryptoCurrency(resultsPerPage));
+  }, [getCryptoCurrency, resultsPerPage]);
 
   useEffect(() => {
     showCryptoCurrency();
   }, [showCryptoCurrency]);
 
   const handleClick = () => {
-    const dataLength = data && data.length;
-
-    console.log(data && data.length);
+    data && data.length > 3 ? setResultsPerPage("3") : setResultsPerPage("4");
   };
 
   const NewWallet = () => {
@@ -37,7 +35,7 @@ export default function Wallets() {
       <Grid xs={12} sm={6} md={3} item>
         <Card sx={{ height: "100%", display: "flex" }}>
           <Tooltip arrow title="Click to add a new wallet">
-            <CardActionArea sx={{ px: 1 }}>
+            <CardActionArea onClick={handleClick} sx={{ px: 1 }}>
               <CardContent>
                 <Avatar sx={{ m: "auto" }}>
                   <AddTwoToneIcon fontSize="large" />
@@ -100,7 +98,7 @@ export default function Wallets() {
                       }}
                     >
                       <Typography variant="h6" noWrap>
-                        {current_price}
+                        ${current_price}
                       </Typography>
                       <Typography fontWeight="300" variant="subtitle2">
                         {current_price} {symbol}
