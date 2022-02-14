@@ -1,6 +1,7 @@
 import { Container, Grid } from "@mui/material";
 import AccountBalance from "./AccountBalance";
 import Header from "./Header";
+import Wallets from "./Wallets";
 
 export default function ProfilePage() {
   return (
@@ -16,7 +17,9 @@ export default function ProfilePage() {
         <Grid item xs={12}>
           <AccountBalance />
         </Grid>
-        <Grid item></Grid>
+        <Grid item lg={8} xs={12}>
+          <Wallets />
+        </Grid>
       </Grid>
     </Container>
   );
